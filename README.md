@@ -1,6 +1,4 @@
-# COMPSCI 235 - Repository for the CS235 Pod Library
-
-## Description
+# Description
 
 This repository contains the codebase for CompSci235's Podcast Library webapp in Semester 2, 2024.
 
@@ -57,8 +55,3 @@ The *project directory/.env* file contains variable settings. They are set with 
 The data files are modified excerpts downloaded from:
 
 https://www.kaggle.com/code/switkowski/building-a-podcast-recommendation-engine/input
-
-
-
-
-# casters-library
