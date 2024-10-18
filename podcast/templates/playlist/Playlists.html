@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="podcast-grid">
+    {% for podcast in User_playlist %}
+        <div class="podcast-item">
+        {% if loop.index0 != 0 %}
+            <a href="{{ url_for('description_bp.description', podcast_title=podcast.title) }}">
+        {% elif loop.index0 == 0 %}
+            <a href="{{ url_for('description_bp.description', podcast_title="favorite_episodes") }}">
+        {% endif %}
+                <img src="{{ podcast.image }}" alt="{{ podcast.title }}">
+                <div class="podcast-info">
+                    <h3>{{ podcast.title }}</h3>
+                    {% for category in podcast.get_categories %}
+                        <p>{{ category }}</p>
+                    {% endfor %}
+                </div>
+            </a>
+        {% if loop.index0 != 0 %}
+            <a href="{{ url_for('playlist_bp.remove_playlist', podcast_title=podcast.title) }}"
+               onclick="return confirm('Are you sure you want to remove this podcast?');">
+                <button>Remove</button>
+        {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

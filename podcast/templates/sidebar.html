@@ -1,0 +1,16 @@
+<div id="side-bar">
+    <div id="favourites">
+        <img src="..\static\css\images\logo.png" alt="Logo">
+    </div>
+    {% if 'user_name' in session %}
+    <div id="welcome-message">
+        <h1>Welcome {{ session['user_name'] }}</h1>
+    </div>
+    {% endif %}
+    <ul>
+        <li><a href="{{ url_for('searchbar_bp.searchbar') }}">Search</a></li>
+        <li><a href="{{ url_for('playlist_bp.playlist_empty') }}">Playlist</a></li>
+        {% if 'user_name' in session %}<li><a href="{{ url_for('authentication_bp.logout') }}">Logout</a></li>{% endif %}
+    </ul>
+    {% include 'copyright.html' %}
+</div>

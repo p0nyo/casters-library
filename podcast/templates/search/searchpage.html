@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div id="search_page_content">
+    <div class='form-wrapper'>
+        <h1>Search results for "{{ query }}"</h1>
+        {% include 'searchbar.html' %}
+    </div>
+    {% if no_results == False %}
+        {% if page > 1 %}
+        <a class="arrows" href="{{ url_for('searchbar_bp.searchpage', page=page-page+1, query=query, filter_by=filter) }}">   <<   </a>
+        {% endif %}
+
+        {% if page <= 1 %}
+        <a class="arrows"> <<  </a>
+        {% endif %}
+
+        {% if page <= 1 %}
+        <a class="arrows"> Previous  </a>
+        {% endif %}
+
+        {% if page > 1 %}
+        <a class="arrows" href="{{ url_for('searchbar_bp.searchpage', page=page-1, query=query, filter_by=filter) }}"> Previous </a>
+        {% endif %}
+
+        <span class="arrows" >Current Page {{ page }} of {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+        <a class="arrows" href="{{ url_for('searchbar_bp.searchpage', page=page+1, query=query, filter_by=filter) }}">Next</a>
+        {% endif %}
+
+        {% if page < total_pages %}
+        <a class="arrows" href="{{ url_for('searchbar_bp.searchpage', page=page+(total_pages-page), query=query, filter_by=filter) }}">   >>   </a>
+        {% endif %}
+
+        {% if page >= total_pages %}
+        <a class="arrows"> Next  </a>
+        {% endif %}
+
+        {% if page >= total_pages %}
+        <a class="arrows"> >>  </a>
+        {% endif %}
+
+    <div id="podcast-grid">
+        {% for podcast in podcasts %}
+            <div class="podcast-item">
+                <a href="{{ url_for('description_bp.description', podcast_title=podcast.title) }}">
+                <img src="{{ podcast.image }}" alt="{{ podcast.title }}">
+                <div class="podcast-info">
+                <h3>{{ podcast.title }}</h3>
+                {% for category in podcast.get_categories %}
+                <p>{{ category }}</p>
+                {% endfor %}
+                </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if no_results %}
+            <h2>No results for "{{ query }}" in "{{ filter }}" category.</h2>
+    {% endif %}
+</div>
+{% endblock %}

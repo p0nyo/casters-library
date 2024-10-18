@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<main id="main">
+    <h1 class="pagination">
+        Library
+    </h1>
+    <div id="podcast-nav">
+        {% if page > 1 %}
+        <a class="arrows" href="{{ url_for('library_bp.library', page=page-page+1) }}"><<</a>
+        {% endif %}
+
+        {% if page <= 1 %}
+        <a class="arrows"><<</a>
+        {% endif %}
+
+        {% if page <= 1 %}
+        <a class="arrows">Previous</a>
+        {% endif %}
+
+        {% if page > 1 %}
+        <a class="arrows" href="{{ url_for('library_bp.library', page=page-1) }}">Previous</a>
+        {% endif %}
+
+        <span class="arrows" >Current Page {{ page }} of {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+        <a class="arrows" href="{{ url_for('library_bp.library', page=page+1) }}">Next</a>
+        {% endif %}
+
+        {% if page < total_pages %}
+        <a class="arrows" href="{{ url_for('library_bp.library', page=page+(total_pages-page)) }}">>></a>
+        {% endif %}
+
+        {% if page >= total_pages %}
+        <a class="arrows">Next</a>
+        {% endif %}
+
+        {% if page >= total_pages %}
+        <a class="arrows">>></a>
+        {% endif %}
+    </div>
+    <div id="podcast-grid">
+
+        {% for podcast in podcasts_on_page %}
+            <div class="podcast-item">
+                <a href="{{ url_for('description_bp.description', podcast_title=podcast.title) }}">
+                <img src="{{ podcast.image }}" alt="{{ podcast.title }}"
+                >
+                <div class="podcast-info">
+                  <h3>{{ podcast.title }}</h3>
+                {% for category in podcast.get_categories %}
+                  <p>{{ category }}</p>
+                {% endfor %}
+
+                </div>
+                </a>
+                <a href="{{ url_for('playlist_bp.playlist', podcast_title=podcast.title) }}">
+                    <button>Favourite</button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+
+{% endblock %}

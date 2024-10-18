@@ -1,0 +1,9 @@
+<form method="POST" action="{{ url_for('searchbar_bp.searchpage') }}">
+    <input type="text" name="query" placeholder="Search..." value="{{ query }}">
+    <select name="filter_by">
+        <option value="title" {% if request.form.get('filter_by') == 'title' %}selected{% endif %}>Title</option>
+        <option value="category" {% if request.form.get('filter_by') == 'category' %}selected{% endif %}>Category</option>
+        <option value="author" {% if request.form.get('filter_by') == 'author' %}selected{% endif %}>Author</option>
+    </select>
+    <button type="submit">Search</button>
+</form>

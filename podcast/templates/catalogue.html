@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Podcast Catalogue</title>
+    <link rel="stylesheet"
+          href="../static/css/main.css" />
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div id="Main-body-Content">
+        <header id="header">
+            Podcast Catalogue
+            <div class="copyright">&copy; znei835 | jayl665 | ttse500 </div>
+        </header>
+        <main id="main">
+            <div id="podcast">
+                <ul>
+                    {% for podcast in list_of_podcasts %}
+                    <li>
+                        <a href="{{url_for("catalogue")}}">
+                            <div class="pod-list">
+                                <img src="{{podcast.img_url}}" alt="Podcast Logo">
+                                <span>{{podcast.title}}</span>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

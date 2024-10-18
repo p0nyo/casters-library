@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="episodes">
+        <ol>
+            <h2>Episodes:</h2>
+            {% if fav_epi | length != 0 %}
+                {% for episode in fav_epi %}
+                <div>
+                <li>{{ episode.episode_name }}</li>
+
+                <ul>
+                    <li> <p> Publication date: {{ episode.publication_date }} </p> </li>
+                    <li> <p> Episode Length: {{ episode.integer_into_time() }} </p> </li>
+                    <li> <p> Link to audio: <a href="{{ episode.link_to_audio }}"> {{ episode.link_to_audio }} </a> </p> </li>
+
+                    <form method="POST">
+                        <button type="submit" name="Remove_podcast" value="{{ loop.index0 }}"
+                        onclick="return confirm('Are you sure you want to remove this episode?');">
+                            Remove from favorites
+                        </button>
+                    </form>
+
+                    <br />
+                </ul>
+
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No favorite episodes.</p>
+            {% endif %}
+        </ol>
+    </div>
+
+
+{% endblock %}

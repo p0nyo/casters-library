@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="description-block">
+    <div class="description">
+        <img class="Image" src="{{ podcast.image }}" alt="podcast image">
+        <h2>{{ podcast.title }}</h2>
+        <u>Author:</u>
+        <p>{{ podcast.author.name }}</p>
+        <u>About:</u> 
+        <p>{{ podcast.description }}</p>
+        <p><u>Categories:</u>
+        <p>{{ ", ".join(podcast.get_categories) }}</p>
+        <u>Language:</u>
+        <p>{{ podcast.language }}</p>
+        <br />
+
+        <div id="comment_form">
+            <form method="POST">
+                <label id="comment_label" for="comment_text_box">
+                    <u>Leave a review:</u>  <br />
+                </label>
+                    <label id="user_review" for="user_review_range">
+                            <input type="range" max="5" min="1" name="user_review" value="3" id="user_review_range"
+                                   step="0.01" oninput="this.nextElementSibling.value = this.value">
+                            <output>3.00</output>
+                    </label>
+                <input type="text" name="comment" id="comment_text_box">
+                <input type="submit" id="post_comment">
+            </form>
+        </div>
+
+        <br />
+
+        <ul>
+        <h3>Comment Section</h3> <h3> Average rating: {{ user_reviews }} </h3>
+            {% for comment in comments | reverse %}
+                <li>{{ comment }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="episodes">
+        <ol>
+            <h2>Episodes:</h2>
+            {% if podcast.get_episodes | length != 0 %}
+                {% for episode in podcast.get_episodes %}
+                <div>
+                <li>{{ episode.episode_name }}</li>
+
+                    <form method="POST" action="{{ url_for('playlist_bp.playlist', podcast_title=podcast.title) }}">
+                        <button type="submit" name="submit_button" id="favourite_episode"> Add to favorite </button>
+                        <input type="hidden" value="{{ episode.episode_id }}" name="episode_id">
+                        <input type="hidden" value="{{ podcast.title }}" name="podcast_title">
+                    </form>
+
+                <ul>
+                    <li> <p> Publication date: {{ episode.publication_date }} </p> </li>
+                    <li> <p> Episode Length: {{ episode.integer_into_time() }} </p> </li>
+                    <li> <p> Link to audio: <a href="{{ episode.link_to_audio }}"> {{ episode.link_to_audio }} </a> </p> </li>
+                    <br />
+                </ul>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No episodes in this podcast.</p>
+            {% endif %}
+        </ol>
+    </div>
+
+</div>
+
+
+{% endblock %}

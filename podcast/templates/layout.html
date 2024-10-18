@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link
+      rel="stylesheet" href="../static/css/styles.css"
+    />
+</head>
+<body>
+    <div id="searchbar-container">
+        {% include 'sidebar.html' %}
+    </div>
+    <div id="header-container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+    </div>
+    <div id="main-container">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
