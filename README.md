@@ -1,10 +1,8 @@
-# COMPSCI 235 - Starter Repository for the CS235 Pod Library
-## Note: JuJuAy and SillySerpent are the same person.
-This is a starter repository for the podcasts webapp project of CompSci 235 in Semester 2, 2024.
+# COMPSCI 235 - Repository for the CS235 Pod Library
 
 ## Description
 
-This repository contains a partial implementation of the domain model. It contains unit tests which can be run through pytest. It also contains a simple Flask application that renders content of a Podcast object instance from our domain model on a blank HTML page. You'll be expanding the domain model implementation, and you have the freedom to modify or remove test cases as needed.
+This repository contains the codebase for CompSci235's Podcast Library webapp in Semester 2, 2024.
 
 ## Installation
 
